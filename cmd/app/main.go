@@ -7,22 +7,25 @@ import (
 	"net/http"
 
 	"go-world/config"
+	"go-world/router"
 )
 
 func main() {
 	appConfig := config.AppConfig()
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", GoWorld)
-	mux.HandleFunc("/go", GoWorld)
+	appRouter := router.New()
 
-	port := appConfig.Server.Port
+	// mux := http.NewServeMux()
+	// mux.HandleFunc("/", GoWorld)
+	// mux.HandleFunc("/go", GoWorld)
 
-	log.Println("Started server on 0.0.0.0:%s\n", port)
+	port := fmt.Sprintf("%d", appConfig.Server.Port)
+
+	log.Printf("Started server on 0.0.0.0:%s\n", port)
 	
 	s := &http.Server{
-		Addr:         fmt.Sprintf(":%d", port),
-		Handler:      mux,
+		Addr:         fmt.Sprintf(":%s", port),
+		Handler:      appRouter,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
 		IdleTimeout:  120 * time.Second,

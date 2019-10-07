@@ -11,7 +11,7 @@ type Config struct {
 }
 
 type serverConfig struct {
-	Port         int           `env:"SERVER_PORT,required"`
+	Port         int           `env:"SERVER_PORT,default=9999"`
 }
 
 func AppConfig() *Config {
