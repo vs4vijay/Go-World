@@ -22,4 +22,8 @@ go get github.com/go-chi/ch
 
 fmt.Sprintf(":%d", appConf.Server.Port)
 
+https://medium.com/learning-cloud-native-go/lets-get-it-started-dc4634ef03b
+
+https://github.com/golang-standards/project-layout
+
 ```

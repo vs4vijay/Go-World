@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"time"
 	"net/http"
 
 	"go-world/config"
 	"go-world/router"
+	"go-world/logger"
 )
 
 func main() {
 	appConfig := config.AppConfig()
+
+	appLogger := logger.New(true)
 
 	appRouter := router.New()
 
@@ -21,7 +23,9 @@ func main() {
 
 	port := fmt.Sprintf("%d", appConfig.Server.Port)
 
-	log.Printf("Started server on 0.0.0.0:%s\n", port)
+	appLogger.Info().Msgf("Started server on 0.0.0.0:%s", port)
+	// logger.Info().Msg("Server starting on 0.0.0.0")
+
 	
 	s := &http.Server{
 		Addr:         fmt.Sprintf(":%s", port),
@@ -32,7 +36,7 @@ func main() {
 	}
 
 	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Fatal("Failed to start server")
+		appLogger.Fatal().Err(err).Msg("Failed to start server")
 	}
 }
 
