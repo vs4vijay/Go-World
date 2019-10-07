@@ -3,19 +3,25 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"time"
+	"net/http"
+
+	"go-world/config"
 )
 
 func main() {
+	appConfig := config.AppConfig()
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", GoWorld)
 	mux.HandleFunc("/go", GoWorld)
 
-	log.Println("Started server on :9999")
+	port := appConfig.Server.Port
+
+	log.Println("Started server on 0.0.0.0:%s\n", port)
 	
 	s := &http.Server{
-		Addr:         ":9999",
+		Addr:         fmt.Sprintf(":%d", port),
 		Handler:      mux,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
