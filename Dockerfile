@@ -21,6 +21,6 @@ RUN apk update && apk add --no-cache bash
 
 COPY --from=builder /Go-World/bin/app /app/
 
-EXPOSE 10000
+EXPOSE 9999
 
 CMD ["/Go-World/bin/app"]
