@@ -1,14 +1,15 @@
 package router
 
 import (
-	"github.com/go-chi/chi"
 	"go-world/app"
+
+	"github.com/go-chi/chi"
 )
 
 func New() *chi.Mux {
 	router := chi.NewRouter()
 
-	router.MethodFunc("GET", "/go", app.HandleIndex)
+	router.MethodFunc("GET", "/", app.HandleIndex)
 
 	return router
 }
