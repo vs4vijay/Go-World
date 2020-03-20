@@ -1,6 +1,6 @@
 # Go-World
 
-https://go-world.fly.dev/go
+https://go-world.fly.dev/
 
 
 

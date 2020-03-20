@@ -6,7 +6,7 @@ WORKDIR /go/src/go-world
 COPY . .
 
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o /go/bin/go-world
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-w -s" -v -o /go/bin/go-world
 
 # Deploy Stage
 FROM alpine:latest

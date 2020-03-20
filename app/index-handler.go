@@ -7,5 +7,5 @@ func HandleIndex(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 
-	w.Write([]byte("Go World!!, New Changes"))
+	w.Write([]byte("Go World!!, New2 Changes"))
 }
