@@ -8,7 +8,7 @@ import (
 func New() *chi.Mux {
 	router := chi.NewRouter()
 
-	router.MethodFunc("GET", "/a", app.HandleIndex)
+	router.MethodFunc("GET", "/go", app.HandleIndex)
 
 	return router
 }
