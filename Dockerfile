@@ -1,26 +1,22 @@
 # Builder Stage
-FROM golang:1.12-alpine as builder
+FROM golang:1.13 as builder
 
-WORKDIR /go-world
-
-RUN apk update && apk add --no-cache gcc musl-dev git bash
-
-COPY go.mod go.sum ./
-
-RUN go mod download
+WORKDIR /go/src/go-world
 
 COPY . .
 
-RUN go build -ldflags "-w -s" -a -o ./bin/app ./main.go
-
+RUN go mod download
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o ./bin/go-world
 
 # Deploy Stage
-FROM alpine
+FROM alpine:latest
 
-RUN apk update && apk add --no-cache bash
+RUN apk update
+RUN apk add --no-cache bash
+RUN apk add --no-cache ca-certificates
 
-COPY --from=builder /go-world/bin/app /app/
+COPY --from=builder /go/bin/go-world /go-world
 
 EXPOSE 9999
 
-CMD ["/app/app"]
+CMD ["/go-world"]
